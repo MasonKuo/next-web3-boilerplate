@@ -1,66 +1,69 @@
-import { useWeb3React } from "@web3-react/core";
-import Head from "next/head";
-import Link from "next/link";
-import Account from "../components/Account";
-import ETHBalance from "../components/ETHBalance";
-import TokenBalance from "../components/TokenBalance";
-import useEagerConnect from "../hooks/useEagerConnect";
+import { useWeb3React } from "@web3-react/core"
+import Head from "next/head"
+import Link from "next/link"
+import Account from "../components/Account"
+import ETHBalance from "../components/ETHBalance"
+import TokenBalance from "../components/TokenBalance"
+import useEagerConnect from "../hooks/useEagerConnect"
 
-const DAI_TOKEN_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f";
+const DAI_TOKEN_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f"
 
 function Home() {
-  const { account, library } = useWeb3React();
+    const { account, library } = useWeb3React()
 
-  const triedToEagerConnect = useEagerConnect();
+    const triedToEagerConnect = useEagerConnect()
 
-  const isConnected = typeof account === "string" && !!library;
+    const isConnected = typeof account === "string" && !!library
 
-  return (
-    <div>
-      <Head>
-        <title>next-web3-boilerplate</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    return (
+        <div>
+            <Head>
+                <title>next-web3-boilerplate</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-      <header>
-        <nav>
-          <Link href="/">
-            <a>next-web3-boilerplate</a>
-          </Link>
+            <header>
+                <nav>
+                    <Link href="/">
+                        <a>next-web3-boilerplate</a>
+                    </Link>
 
-          <Account triedToEagerConnect={triedToEagerConnect} />
-        </nav>
-      </header>
+                    <Account triedToEagerConnect={triedToEagerConnect} />
+                </nav>
+            </header>
 
-      <main>
-        <h1>
+            <main>
+                {/* <h1>
           Welcome to{" "}
           <a href="https://github.com/mirshko/next-web3-boilerplate">
             next-web3-boilerplate
           </a>
-        </h1>
+        </h1> */}
 
-        {isConnected && (
-          <section>
-            <ETHBalance />
+                {isConnected && (
+                    <section>
+                        <ETHBalance />
 
-            <TokenBalance tokenAddress={DAI_TOKEN_ADDRESS} symbol="DAI" />
-          </section>
-        )}
-      </main>
+                        <TokenBalance
+                            tokenAddress={DAI_TOKEN_ADDRESS}
+                            symbol="DAI"
+                        />
+                    </section>
+                )}
+            </main>
 
-      <style jsx>{`
-        nav {
-          display: flex;
-          justify-content: space-between;
-        }
+            <style jsx>{`
+                nav {
+                    display: flex;
+                    justify-content: space-between;
+                }
 
-        main {
-          text-align: center;
-        }
-      `}</style>
-    </div>
-  );
+                main {
+                    text-align: center;
+                }
+            `}</style>
+        </div>
+    )
 }
 
-export default Home;
+export default Home
